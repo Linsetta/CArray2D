@@ -8,15 +8,29 @@ typedef struct CArray2D_s {
     char** data;
 } CArray2D;
 
+//CArray2D* new_CArray2D(int width, int height) {
+//    CArray2D* c2d = (CArray2D*)malloc(sizeof(CArray2D));
+//    c2d->width = width;
+//    c2d->height = height;
+//    c2d->data = (char**)malloc(sizeof(char*) * height);
+//    for (int row = 0; row < height; row ++) {
+//        c2d->data[row] = (char*)malloc(sizeof(char) * width);
+//        for (int col = 0; col < width; col ++) {
+//            c2d->data[row][col] = ' ';
+//        }
+//    }
+//    return c2d;
+//}
+
 CArray2D* new_CArray2D(int width, int height) {
-    CArray2D* c2d = (CArray2D*)malloc(sizeof(CArray2D));
-    c2d->width = width;
-    c2d->height = height;
-    c2d->data = (char**)malloc(sizeof(char*) * height);
+    CArray2D* c2d = (CArray2D*)malloc(sizeof(CArray2D) * 1);
+    c2d[0].width = width;
+    c2d[0].height = height;
+    c2d[0].data = (char**)malloc(sizeof(char*) * height);
     for (int row = 0; row < height; row ++) {
-        c2d->data[row] = (char*)malloc(sizeof(char) * width);
+        c2d[0].data[row] = (char*)malloc(sizeof(char) * width);
         for (int col = 0; col < width; col ++) {
-            c2d->data[row][col] = ' ';
+            c2d[0].data[row][col] = ' ';
         }
     }
     return c2d;

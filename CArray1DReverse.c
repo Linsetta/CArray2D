@@ -5,6 +5,7 @@
 int main(int argc, char** argv) {
     printf("CArray1DReverse.main: here.\n");
     int length = 10;
+    printf("The length of array is: %d\n", length); 
     // allocate data
     char* data = (char*)malloc(sizeof(char) * length);
     // initialize data
@@ -18,6 +19,10 @@ int main(int argc, char** argv) {
             printf(", ");
         }
         printf("%c", data[i]);
+        char* ptr = data + i;
+        //char* ptr = &(data[i]);
+        printf("(nina: %%p=%p)", ptr);
+        printf("(nina: %%c=%c)", *ptr);
     }
     printf("}\n");
     // reverse data
