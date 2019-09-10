@@ -12,10 +12,14 @@ CArray1DReverse: CArray1DReverse.c makefile
 CArray1DPointersAndIndices: CArray1DPointersAndIndices.c makefile
 	gcc -o CArray1DPointersAndIndices -Wall -O0 -g CArray1DPointersAndIndices.c
 
+CLinkedList: CLinkedList.c makefile
+	gcc -o CLinkedList -Wall -O0 -g CLinkedList.c
+
 clean:
 	rm -f CArray2D
 	rm -f CArray2DSimple
 	rm -f CArray1DReverse
 	rm -f CArray1DPointersAndIndices
+	rm -f CLinkedList
 	rm -f *~
 
