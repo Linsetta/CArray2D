@@ -2,6 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 
+void print_array(char* name, double* array, int length) {
+    printf("%s = (", name);
+    for (int i = 0; i < length; i ++) {
+        if (i != 0) {
+            printf(", ");
+        }
+        printf("%g", array[i]);
+    }
+    printf(")\n");
+}
+
 // 3, 2, 1
 //       *
 // 
@@ -40,28 +51,16 @@ int main () {
         input_array[i] = random_number_2_to_5;
     }
     // print input_array
-    printf("input_array = (");
-    for (int i = 0; i < input_length; i ++) {
-        if (i != 0) {
-            printf(", ");
-        }
-        printf("%g", input_array[i]);
-    }
-    printf(")\n");
+    print_array("input_array", input_array, input_length);
     // insertion sort input_array into sorted_array
     for (int i = 0; i < input_length; i ++) {
+        // print sorted_array
+        print_array("sorted_array", sorted_array, i);
         // insert input_array[i] into sorted_array
         sorted_array_insert(sorted_array, i, input_array[i]);
     }
     // print sorted_array
-    printf("sorted_array = (");
-    for (int i = 0; i < input_length; i ++) {
-        if (i != 0) {
-            printf(", ");
-        }
-        printf("%g", sorted_array[i]);
-    }
-    printf(")\n");
+    print_array("sorted_array", sorted_array, input_length);
     // free input_array
     free(input_array);
     // free sorted_array
