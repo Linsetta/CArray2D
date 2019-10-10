@@ -1,4 +1,4 @@
-default: CArray2D CArray2DSimple CArray1DReverse CArray1DPointersAndIndices CArray1DSort CLinkedList CBinaryTree
+default: CArray2D CArray2DSimple CArray1DReverse CArray1DPointersAndIndices CArray1DSort CLinkedList CBinaryTree CDoublyLinkedList
 
 CArray2D: CArray2D.c makefile
 	gcc -o CArray2D -Wall -O0 -g CArray2D.c
@@ -21,6 +21,9 @@ CLinkedList: CLinkedList.c makefile
 CBinaryTree: CBinaryTree.c makefile
 	gcc -o CBinaryTree -Wall -O0 -g CBinaryTree.c
 
+CDoublyLinkedList: CDoublyLinkedList.c makefile
+	gcc -o CDoublyLinkedList -Wall -O0 -g CDoublyLinkedList.c
+
 clean:
 	rm -f CArray2D
 	rm -f CArray2DSimple
@@ -29,5 +32,6 @@ clean:
 	rm -f CArray1DPointersAndIndices
 	rm -f CLinkedList
 	rm -f CBinaryTree
+	rm -f CDoublyLinkedList
 	rm -f *~
 
