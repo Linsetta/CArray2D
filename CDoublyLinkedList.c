@@ -12,6 +12,19 @@ struct DoublyLinkedListNode_s {
     DoublyLinkedListNode* back;
 };
 
+// constructor for creating doubly linked list with two sentinel nodes
+//DoublyLinkedListNode* new_doubly_linked_list() {
+//    DoublyLinkedListNode* front = (DoublyLinkedListNode*)malloc(sizeof(DoublyLinkedListNode));
+//    DoublyLinkedListNode* end   = (DoublyLinkedListNode*)malloc(sizeof(DoublyLinkedListNode));
+//    front->forward              = end;
+//    front->data                 = DOUBLY_LINKED_LIST_NODE_SENTINEL_VALUE;
+//    front->back                 = NULL;
+//    end->forward                = NULL;
+//    end->data                   = DOUBLY_LINKED_LIST_NODE_SENTINEL_VALUE;
+//    end->back                   = front;
+//    return front;
+//}
+
 DoublyLinkedListNode* new_doubly_linked_list() {
     DoublyLinkedListNode* list = (DoublyLinkedListNode*)malloc(sizeof(DoublyLinkedListNode));
     list->forward = list;
@@ -30,7 +43,7 @@ void free_doubly_linked_list(DoublyLinkedListNode* list) {
     free(list);
 }
 
-void doubly_linked_list__traverse(DoublyLinkedListNode* list) {
+void doubly_linked_list__traverse_forward(DoublyLinkedListNode* list) {
     printf("[");
     DoublyLinkedListNode* i = list->forward;
     int index = 0;
@@ -46,7 +59,7 @@ void doubly_linked_list__traverse(DoublyLinkedListNode* list) {
 }
 
 // sorted insert
-void doubly_linked_list__insert(DoublyLinkedListNode* list, int data) {
+int doubly_linked_list__insert(DoublyLinkedListNode* list, int data) {
     DoublyLinkedListNode* new_node = (DoublyLinkedListNode*)malloc(sizeof(DoublyLinkedListNode));
     new_node->data = data;
     DoublyLinkedListNode* previous = list;
@@ -58,7 +71,9 @@ void doubly_linked_list__insert(DoublyLinkedListNode* list, int data) {
             new_node->back = previous;
             new_node->forward = i;
             i->back = new_node;
-            return;
+            return 0; // no duplicate exists
+        } else if (data == i->data) {
+            return 1; // duplicate exists
         }
         previous = i;
         i = i->forward;
@@ -68,16 +83,61 @@ void doubly_linked_list__insert(DoublyLinkedListNode* list, int data) {
     new_node->back = previous;
     new_node->forward = i;
     i->back = new_node;
+    return 0; // no duplicate exists
+}
+
+int doubly_linked_list__find(DoublyLinkedListNode* list, int data) {
+    DoublyLinkedListNode* iter = list->forward;
+    while (iter->data != DOUBLY_LINKED_LIST_NODE_SENTINEL_VALUE) {
+        if (iter->data == data) {
+            return 1; // data found
+        }
+        iter = iter->forward;
+    }
+    return 0; // data not found
+}
+
+int doubly_linked_list__delete(DoublyLinkedListNode* list, int data) {
+    DoublyLinkedListNode* iter = list->forward;
+    while (iter->data != DOUBLY_LINKED_LIST_NODE_SENTINEL_VALUE) {
+        if (iter->data == data) {
+            iter->back->forward = iter->forward;
+            iter->forward->back = iter->back;
+            free(iter);
+            return 1; // data found
+        }
+        iter = iter->forward;
+    }
+    return 0; // data not found
 }
 
 int main(int argc, char** argv) {
     printf("CDoublyLinkedList: here.\n");
     DoublyLinkedListNode* list = new_doubly_linked_list();
-    doubly_linked_list__insert(list, 3);
     doubly_linked_list__insert(list, 2);
+    doubly_linked_list__insert(list, 3);
+    doubly_linked_list__insert(list, 3);
+    doubly_linked_list__insert(list, 3);
+    doubly_linked_list__insert(list, 3);
+    doubly_linked_list__insert(list, 3);
     doubly_linked_list__insert(list, 1);
-    printf("sentinel_node = ");
-    doubly_linked_list__traverse(list);
+    doubly_linked_list__insert(list, 1);
+    doubly_linked_list__insert(list, 1);
+    doubly_linked_list__insert(list, 1);
+    doubly_linked_list__insert(list, 1);
+    doubly_linked_list__insert(list, 4);
+    printf("list = ");
+    doubly_linked_list__traverse_forward(list);
+    doubly_linked_list__delete(list, 1);
+    doubly_linked_list__delete(list, 2);
+    doubly_linked_list__delete(list, 3);
+    printf("list = ");
+    doubly_linked_list__traverse_forward(list);
+    if (doubly_linked_list__find(list, 4)) {
+        printf("found 4!\n");
+    } else {
+        printf("did not find 4!\n");
+    }
     free_doubly_linked_list(list);
     return 0; // success (to bash)
 }
