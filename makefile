@@ -27,6 +27,9 @@ CDoublyLinkedList: CDoublyLinkedList.c makefile
 CHashTable: CHashTable.c makefile
 	gcc -o CHashTable -Wall -O0 -g CHashTable.c
 
+CStack: CStack.c makefile
+	gcc -o CStack -Wall -O0 -g CStack.c
+
 clean:
 	rm -f CArray2D
 	rm -f CArray2DSimple
@@ -37,5 +40,6 @@ clean:
 	rm -f CBinaryTree
 	rm -f CDoublyLinkedList
 	rm -f CHashTable
+	rm -f CStack
 	rm -f *~
 
