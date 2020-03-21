@@ -1,7 +1,10 @@
-default: CArray2D CArray2DSimple CArray1DReverse CArray1DPointersAndIndices CArray1DSort CLinkedList CBinaryTree CDoublyLinkedList CHashTable
+default: CArray2D CArray2DSimple CArray1DReverse CArray1DPointersAndIndices CArray1DSort CLinkedList CBinaryTree CDoublyLinkedList CHashTable CArray2DJagged
 
 CArray2D: CArray2D.c makefile
 	gcc -o CArray2D -Wall -O0 -g CArray2D.c
+
+CArray2DJagged: CArray2DJagged.c makefile
+	gcc -o CArray2DJagged -Wall -O0 -g CArray2DJagged.c
 
 CArray2DSimple: CArray2DSimple.c makefile
 	gcc -o CArray2DSimple -Wall -O0 -g CArray2DSimple.c
@@ -30,8 +33,16 @@ CHashTable: CHashTable.c makefile
 CStack: CStack.c makefile
 	gcc -o CStack -Wall -O0 -g CStack.c
 
+CFileIO: CFileIO.c makefile
+	gcc -o CFileIO -Wall -O0 -g CFileIO.c
+
+CString: CString.c makefile
+	gcc -o CString -Wall -O0 -g CString.c
+
 clean:
 	rm -f CArray2D
+	rm -f CString
+	rm -f CArray2DJagged
 	rm -f CArray2DSimple
 	rm -f CArray1DReverse
 	rm -f CArray1DSort
@@ -41,5 +52,6 @@ clean:
 	rm -f CDoublyLinkedList
 	rm -f CHashTable
 	rm -f CStack
+	rm -f CFileIO
 	rm -f *~
 
